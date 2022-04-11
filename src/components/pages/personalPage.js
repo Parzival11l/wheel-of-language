@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Grid } from '@mui/material'
-import ErrorTest from '../windowTest/errorTest'
 import PersonalAccount from '../personalAccount'
+import { Navigate } from 'react-router-dom'
 
 
 class PersonalPage extends Component {
@@ -13,7 +13,7 @@ class PersonalPage extends Component {
 
   render() {
 
-    const onVisiblePersonalPage= this.props.onRegistrationPerson ? <PersonalAccount visibleInfo={this.state.visibleInfo} onResult={this.state.onResult} currentPerson={this.props.currentPerson} /> : <ErrorTest />
+    const onVisiblePersonalPage= this.props.onRegistrationPerson ? <PersonalAccount visibleInfo={this.state.visibleInfo} onResult={this.state.onResult} currentPerson={this.props.currentPerson} /> : <Navigate to="/auth" />
 
     return (
       <Grid

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Grid } from '@mui/material'
 import MyBtn from '../myBtn'
 import WindowTest from '../windowTest'
-import ErrorTest from '../windowTest/errorTest'
+import { Navigate } from 'react-router-dom'
 
 class TestingPage extends Component {
   state = {
@@ -21,7 +21,7 @@ class TestingPage extends Component {
 
   render() {
     console.log('TestingPage',this.props.currentPerson)
-    const onVisibleTest = this.state.onRegistration ? (this.state.onVisible ? <WindowTest /> : <MyBtn onClickFunction={this.swapVisible} value='Start Test' />) : <ErrorTest />
+    const onVisibleTest = this.state.onRegistration ? (this.state.onVisible ? <WindowTest /> : <MyBtn onClickFunction={this.swapVisible} value='Start Test' />) : <Navigate to="/auth" />
 
     return (
       <Grid
