@@ -1,7 +1,9 @@
 import axios from 'axios'
 
-const headers = {}
-const baseURL = 'https://swapi.dev/api/'
+const headers = {
+  'Accept': 'application/json',
+}
+const baseURL = 'http://localhost:3000'
 
 
 const axiosClient = axios.create({

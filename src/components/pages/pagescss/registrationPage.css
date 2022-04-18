@@ -13,11 +13,8 @@
 }
 
 .regBtn{
-  border: 0px;
-  min-height: 40px;
-  min-width: 100px;
-  border-radius: 20px;
-  background-color: greenyellow;
+  min-height: 50px;
+  background-color: black;
   text-shadow: 0px 0px 5px white;
-  box-shadow: 0px 0px 10px black;
+  box-shadow: 0px 0px 10px white;
 }

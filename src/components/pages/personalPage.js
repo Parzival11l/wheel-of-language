@@ -1,19 +1,15 @@
-import React, { Component } from 'react'
+import React, { Component, useContext } from 'react'
 import { Grid } from '@mui/material'
 import PersonalAccount from '../personalAccount'
-import { Navigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import { AuthContext } from '../app'
 
 
-class PersonalPage extends Component {
-  state = {
-    visibleInfo: false,
-    onResult: this.props.onResult
-  }
+export default function PersonalPage() {
+  const auth = useContext(AuthContext)
+  const navigate = useNavigate()
 
-
-  render() {
-
-    const onVisiblePersonalPage= this.props.onRegistrationPerson ? <PersonalAccount visibleInfo={this.state.visibleInfo} onResult={this.state.onResult} currentPerson={this.props.currentPerson} /> : <Navigate to="/auth" />
+    !auth.isSignedIn && navigate('/auth')
 
     return (
       <Grid
@@ -26,12 +22,12 @@ class PersonalPage extends Component {
           <h1 className='mainTxt'>Personal Page</h1>
         </Grid>
         <Grid item xs={12}>
-          {onVisiblePersonalPage}
+          <PersonalAccount
+            visibleInfo
+            onResult
+          />
         </Grid>
       </Grid>
 
     )
-  }
 }
-
-export default PersonalPage
