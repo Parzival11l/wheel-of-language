@@ -1,27 +1,20 @@
-import React, { Component } from 'react'
+import React, { useContext, useState } from 'react'
 import { Grid } from '@mui/material'
-import MyBtn from '../myBtn'
 import WindowTest from '../windowTest'
-import { Navigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import { AuthContext } from '../app'
 
-class TestingPage extends Component {
-  state = {
-    onVisible: false,
-    onRegistration: this.props.onRegistrationPerson
-  }
+export default function TestingPage() {
 
- swapVisible = () => {
-   console.log('Visible',this.state.onVisible)
-    this.setState(({onVisible}) =>{
-      return {
-        onVisible: !onVisible
-      }
-    })
- }
+  const [onVisible, setOnVisible] = useState(false)
 
-  render() {
-    console.log('TestingPage',this.props.currentPerson)
-    const onVisibleTest = this.state.onRegistration ? (this.state.onVisible ? <WindowTest /> : <MyBtn onClickFunction={this.swapVisible} value='Start Test' />) : <Navigate to="/auth" />
+  const auth = useContext(AuthContext)
+  const navigate = useNavigate()
+
+  !auth.isSignedIn && navigate('/auth')
+
+
+    const onVisibleTest =  onVisible ? <WindowTest /> : <button onClick={() => setOnVisible(true)} className='myBtn'> Start Test </button>
 
     return (
       <Grid
@@ -37,7 +30,5 @@ class TestingPage extends Component {
         </Grid>
       </Grid>
     )
-  }
 }
 
-export default TestingPage

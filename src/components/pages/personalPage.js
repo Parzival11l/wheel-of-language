@@ -1,4 +1,4 @@
-import React, { Component, useContext } from 'react'
+import React, { useContext } from 'react'
 import { Grid } from '@mui/material'
 import PersonalAccount from '../personalAccount'
 import { useNavigate } from 'react-router-dom'
@@ -19,13 +19,7 @@ export default function PersonalPage() {
         justifyContent='center'
       >
         <Grid item xs={12}>
-          <h1 className='mainTxt'>Personal Page</h1>
-        </Grid>
-        <Grid item xs={12}>
-          <PersonalAccount
-            visibleInfo
-            onResult
-          />
+          <PersonalAccount />
         </Grid>
       </Grid>
 

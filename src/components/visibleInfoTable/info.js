@@ -1,37 +1,37 @@
-import React, { Component } from 'react'
-import { Grid } from '@mui/material'
-import MyBtn from '../myBtn'
+import React, { useContext } from 'react'
+import { Button, Grid } from '@mui/material'
+import { AuthContext } from '../app'
 
-class Info extends Component {
-  render() {
-    const { currentPerson, onClickFunc } = this.props
-    return (
-     <Grid
-       container
-       direction='column'
-       alignItems='center'
-     >
-        <Grid item>
-          <h1>{currentPerson.name}</h1>
-        </Grid>
-       <Grid item>
-         <h1>{currentPerson.name}</h1>
-       </Grid>
-       <Grid item>
-          <h1>{currentPerson.birth_year}</h1>
-       </Grid>
-       <Grid item>
-           <h1>{currentPerson.eye_color}</h1>
-       </Grid>
-       <Grid item>
-         <h1>{currentPerson.gender}</h1>
-       </Grid>
-       <Grid item marginTop={3.5}>
-         <MyBtn onClickFunction={onClickFunc} value='Change'/>
-       </Grid>
-     </Grid>
-    )
+export default function Info() {
+
+  const auth = useContext(AuthContext)
+
+  const onClickFunc = () => {
+    auth.setAuth({
+      ...auth,
+      isInfo: false
+    })
   }
+
+  return (
+    <Grid
+      container
+      direction='column'
+      alignItems='center'
+    >
+      <Grid item>
+        <h1 className='defaultTxt'>Age: {auth.info.age}</h1>
+      </Grid>
+      <Grid item>
+        <h1 className='defaultTxt'>School: {auth.info.school}</h1>
+      </Grid>
+      <Grid item>
+        <h1 className='defaultTxt'>Disability: {auth.info.disabled}</h1>
+      </Grid>
+      <Grid item marginTop={3.5}>
+        <Button onClick={onClickFunc} className='myBtn'>Change Info</Button>
+      </Grid>
+    </Grid>
+  )
 }
 
-export default Info

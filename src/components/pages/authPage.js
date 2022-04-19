@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
-import { FormControl, Grid } from '@mui/material'
-import { NavLink } from 'react-router-dom'
+import { Button, FormControl, Grid } from '@mui/material'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../app'
 import { axiosClient } from '../../api/api.config'
 
@@ -9,6 +9,7 @@ export default function AuthPage() {
 
   const [login, setLogin] = useState('')
   const [password, setPass] = useState('')
+  const navigate = useNavigate()
 
   const onSubmit = () => {
     axiosClient.post('/users/sign_in', { user: { login, password } })
@@ -19,6 +20,7 @@ export default function AuthPage() {
           isSignedIn: true,
           user: response.data.user
         })
+        navigate('/personal')
       })
       .catch((error) => {
         console.log(error)
@@ -54,7 +56,7 @@ export default function AuthPage() {
         </FormControl>
       </Grid>
       <Grid item marginTop={10.7}>
-        <button className='regBtn' onClick={onSubmit}>Sign in</button>
+        <Button onClick={onSubmit} className='myBtn'>Sign In</Button>
       </Grid>
       <Grid container justifyContent='center' marginTop={20}>
         <Grid item>

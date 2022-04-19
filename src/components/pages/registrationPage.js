@@ -1,79 +1,78 @@
-import React, { Component } from 'react'
+import React, { useContext, useState } from 'react'
 import { FormControl, Grid, Button } from '@mui/material'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 
 import './pagescss/registrationPage.css'
 import { axiosClient } from '../../api/api.config'
+import { AuthContext } from '../app'
 
-class RegistrationPage extends Component {
+export default function RegistrationPage() {
 
-  state = {
-    login: '',
-    password: ''
-  }
+  const auth = useContext(AuthContext)
 
-  render() {
+  const [login, setLogin] = useState('')
+  const [password, setPass] = useState('')
+  const navigate = useNavigate()
 
-
-
-    const { login, password } = this.state
-
-
-
-    const onSubmit = () => {
-      axiosClient.post('/users', {
-        user: {
-          login,
-          password
-        }
+  const onSubmit = () => {
+    axiosClient.post('/users', { user: { login, password } })
+      .then((response) => {
+        auth.setAuth({
+          ...auth,
+          isLoading: false,
+          isSignedIn: true,
+          user: response.data.user
+        })
+        navigate('/personal')
       })
-    }
-
-    return (
-      <Grid
-        container
-        alignItems='center'
-        direction='column'
-        className='registr'
-      >
-        <Grid item>
-          <h1 className='mainTxt'>Registration</h1>
-        </Grid>
-        <Grid item>
-          <FormControl>
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+  console.log(auth.user)
+  return (
+    <Grid
+      container
+      alignItems='center'
+      direction='column'
+      className='registr'
+    >
+      <Grid item>
+        <h1 className='mainTxt'>Registration</h1>
+      </Grid>
+      <Grid item>
+        <FormControl>
           <input
             type='text'
+            value={login}
             placeholder='login'
             className='input'
-            value={login}
-            onChange={(event) => this.setState({ login: event.target.value })}
+            onChange={(e) => setLogin(e.target.value)}
           />
           <input
             type='password'
+            value={password}
             placeholder='password'
             className='input'
-            value={password}
-            onChange={(event) => this.setState({ password: event.target.value })}
+            onChange={(e) => setPass(e.target.value)}
           />
-          </FormControl>
-        </Grid>
-        <Grid item>
-          <Button
-            className='regBtn'
-            disabled={!password || !login}
-            onClick={onSubmit}
-          >
-            Registration
-          </Button>
-        </Grid>
-        <Grid container justifyContent='center' marginTop={20}>
+        </FormControl>
+      </Grid>
+      <Grid item>
+        <Button
+          className='regBtn'
+          disabled={!password || !login}
+          onClick={onSubmit}
+        >
+          Registration
+        </Button>
+      </Grid>
+      <Grid container justifyContent='center' marginTop={20}>
         <Grid item>
           <NavLink to='/auth' className='defaultTxt'>Sign in</NavLink>
         </Grid>
-        </Grid>
       </Grid>
-    )
-  }
+    </Grid>
+  )
 }
 
-export default RegistrationPage

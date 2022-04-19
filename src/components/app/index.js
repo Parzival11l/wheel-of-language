@@ -13,7 +13,11 @@ import Header from '../Header'
 const defaultAuthContext = {
   isSignedIn: false,
   isLoading: false,
+  isInfo: false,
+  isResult: false,
   user: null,
+  info: null,
+  result: null,
   setUser: (user) => user
 }
 
@@ -29,47 +33,29 @@ export default function App() {
     setAuth
   }
 
-  // getPerson() {
-  //   axiosClient.get(`/persons/profile`)
-  //     .then(res => {
-  //       const person = res
-  //       this.setState({
-  //         schoolBoy: person.data
-  //       })
-  //     })
-  //     .catch(err => {
-  //       console.log('Запрос не прошёл')
-  //     })
-  // }
+  return (
+    <AuthContext.Provider value={contextProps}>
+      <Container disableGutters maxWidth={false}>
+        <Header/>
+        <Container maxWidth={false} style={{
+          backgroundImage: `url("https://w-dog.ru/wallpapers/2/3/480397678075875.jpg")`,
+          width: '100%',
+          height: '1200px'
+        }}>
+          <Grid container>
+            <Grid item xs={12}>
+              <Routes>
+                <Route path="/" element={<HomePage/>}/>
+                <Route path="/auth" element={<AuthPage/>}/>
+                <Route path="/registration" element={<RegistrationPage/>}/>
+                    <Route path="/test" element={<TestingPage />} />
+                    <Route path="/personal" element={<PersonalPage />} />
 
-    return (
-      <AuthContext.Provider value={contextProps}>
-        <Container disableGutters maxWidth={false}>
-          <Header />
-          <Container maxWidth={false} style={{
-            backgroundImage: `url("https://w-dog.ru/wallpapers/2/3/480397678075875.jpg")`,
-            width: '100%',
-            height: '1200px'
-          }}>
-            <Grid container>
-              <Grid item xs={12}>
-                <Routes>
-                  <Route path="/" element={<HomePage/>}/>
-                  <Route path="/auth" element={<AuthPage />}/>
-                  <Route path="/registration" element={<RegistrationPage />}/>
-
-                  {auth.isSignedIn && (
-                    <>
-                      <Route path="/test" element={<TestingPage  />}/>
-                      <Route path="/personal" element={<PersonalPage />}/>
-                    </>
-                  )}
-                </Routes>
-              </Grid>
+              </Routes>
             </Grid>
-          </Container>
-
+          </Grid>
         </Container>
-      </AuthContext.Provider>
-    );
+      </Container>
+    </AuthContext.Provider>
+  )
 }

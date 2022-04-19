@@ -1,27 +1,46 @@
-import React, { Component } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Grid } from '@mui/material'
 import Info from '../visibleInfoTable/info'
 import FormInfo from '../visibleInfoTable/formInfo'
 import Result from './resultTest'
+import { axiosClient } from '../../api/api.config'
+import { AuthContext } from '../app'
 
-export default function PersonalAccount(currentPerson) {
+export default function PersonalAccount() {
 
-  const changeInfo = () => {
-    console.log('Visible', this.props.onVisibleInfo)
-    this.setState(({ onVisibleInfo }) => {
-      return {
-        onVisibleInfo: !onVisibleInfo
-      }
-    })
-  }
+  const auth = useContext(AuthContext)
+
+  useEffect(() => {
+    axiosClient.get(`/infos/${auth.user.id}`)
+      .then(response => {
+        auth.setAuth({
+          ...auth,
+          info: response.data.info,
+          isInfo: true
+        })
+      })
+      .catch(err => {
+        console.log('Запрос не прошёл')
+      })
+
+    axiosClient.get(`/results/${auth.user.id}`)
+      .then(response => {
+        auth.setAuth({
+          ...auth,
+          result: response.data.result,
+          isResult: true
+        })
+      })
+      .catch(err => {
+        console.log('Запрос не прошёл')
+      })
+  },[])
 
 
-  const { currentPerson } = this.props
-  const { onVisibleInfo, onResult } = this.state
-  const visibleInfoTable = onVisibleInfo ? <Info currentPerson={currentPerson} onClickFunc={this.changeInfo}/> :
-    <FormInfo currentPerson={currentPerson} onClickFunc={this.changeInfo}/>
-  const visibleResult = onResult ? <Result/> : null
-  console.log(currentPerson)
+  const name = auth.info ? <h1 className='mainTxt'>{auth.info.first_name} {auth.info.last_name}</h1>  : <h1 className='mainTxt'>Personal Page</h1>
+  const visibleInfoTable = auth.isInfo ? <Info /> : <FormInfo />
+  const visibleResult = auth.result ? <Result /> : null
+
   return (
     <Grid
       container
@@ -30,17 +49,14 @@ export default function PersonalAccount(currentPerson) {
       alignItems='center'
     >
       <Grid item xs={12}>
-        <h1 className='mainTxt'>{currentPerson.name}</h1>
-
+       {name}
       </Grid>
       <Grid item xs={12}>
         {visibleInfoTable}
-
-
       </Grid>
       <Grid item>
         <Grid
-          conteiner
+          container
           marginTop={12}
         >
           <Grid item xs={12}>
