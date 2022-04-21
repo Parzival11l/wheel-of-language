@@ -1,10 +1,22 @@
 import React, { useContext, useState } from 'react'
-import { Button, FormControl, Grid } from '@mui/material'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { Button, Grid, Typography } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../app'
 import { axiosClient } from '../../api/api.config'
 
+import './pagescss/authPage.css'
+import Swal from 'sweetalert2'
+import chel2 from '../image/Screenshot 2022-05-10 at 18.14.37.png'
+import styled from '@emotion/styled'
+
+
+const Image = styled('img')`
+  width: 80%;
+  height: 90%;
+`
+
 export default function AuthPage() {
+
   const auth = useContext(AuthContext)
 
   const [login, setLogin] = useState('')
@@ -12,39 +24,53 @@ export default function AuthPage() {
   const navigate = useNavigate()
 
   const onSubmit = () => {
+
     axiosClient.post('/users/sign_in', { user: { login, password } })
       .then((response) => {
+        console.log(response)
         auth.setAuth({
           ...auth,
           isLoading: false,
           isSignedIn: true,
           user: response.data.user
         })
+        Swal.fire(
+          'Good job!',
+          'Welcome!',
+          'success'
+        )
         navigate('/personal')
       })
-      .catch((error) => {
-        console.log(error)
-      })
+      .catch(err => {
+        console.log(err)
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!'
+        })
+  })
   }
 
   return (
-    <Grid
-      container
-      alignItems='center'
-      direction='column'
-      className='registr'
-    >
-      <Grid item>
-        <h1 className='mainTxt'>Sign in</h1>
-      </Grid>
-      <Grid item>
-        <FormControl>
+    <Grid container>
+
+        <Grid item xs={5} marginTop={15}>
+          <Image alt='' src={chel2}/>
+        </Grid>
+
+        <Grid item xs={2} marginTop={20}>
+          <Grid container justifyContent='center' alignItems='center'>
+            <Grid item xs={12}>
+              <Typography fontSize={60} color='white' align='center'>Sign in</Typography>
+            </Grid>
+            <Grid item xs={12}>
           <input
             type='text'
             value={login}
             placeholder='login'
             className='input'
             onChange={(e) => setLogin(e.target.value)}
+            required
           />
           <input
             type='password'
@@ -52,17 +78,25 @@ export default function AuthPage() {
             placeholder='password'
             className='input'
             onChange={(e) => setPass(e.target.value)}
+            required
           />
-        </FormControl>
       </Grid>
-      <Grid item marginTop={10.7}>
-        <Button onClick={onSubmit} className='myBtn'>Sign In</Button>
+      <Grid item marginTop={4}>
+        <Button onClick={onSubmit} variant="contained">Sign In</Button>
       </Grid>
-      <Grid container justifyContent='center' marginTop={20}>
-        <Grid item>
-          <NavLink to='/registration' className='defaultTxt'>Sign up</NavLink>
+            <Grid container justifyContent='center' marginTop={20}>
+              <Grid item xs={12}>
+                <Typography
+                  fontSize={30}
+                  color='white'
+                  align='center'
+                  onClick={() => {navigate('/registration')}}
+                >
+                  Sign Up</Typography>
         </Grid>
-      </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
     </Grid>
   )
 }

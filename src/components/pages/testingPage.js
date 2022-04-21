@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { Grid } from '@mui/material'
+import { Button, Grid } from '@mui/material'
 import WindowTest from '../windowTest'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../app'
@@ -14,7 +14,7 @@ export default function TestingPage() {
   !auth.isSignedIn && navigate('/auth')
 
 
-    const onVisibleTest =  onVisible ? <WindowTest /> : <button onClick={() => setOnVisible(true)} className='myBtn'> Start Test </button>
+    const onVisibleTest =  onVisible ? <WindowTest /> : <Button onClick={() => setOnVisible(true)} variant="contained"> Start Test </Button>
 
     return (
       <Grid

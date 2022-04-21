@@ -3,6 +3,7 @@ import { Grid } from '@mui/material'
 import PersonalAccount from '../personalAccount'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../app'
+import Header from '../Header'
 
 
 export default function PersonalPage() {
@@ -10,14 +11,9 @@ export default function PersonalPage() {
   const navigate = useNavigate()
 
     !auth.isSignedIn && navigate('/auth')
-
+    !auth.user.id && navigate('/auth')
     return (
-      <Grid
-        container
-        direction='column'
-        alignItems='center'
-        justifyContent='center'
-      >
+      <Grid container justifyContent='center'>
         <Grid item xs={12}>
           <PersonalAccount />
         </Grid>

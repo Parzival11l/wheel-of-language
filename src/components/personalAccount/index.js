@@ -1,8 +1,11 @@
-import React, { useContext, useEffect } from 'react'
-import { Grid } from '@mui/material'
+import React, { useContext } from 'react'
+import { Box, Button, Container, Grid } from '@mui/material'
 import Info from '../visibleInfoTable/info'
-import FormInfo from '../visibleInfoTable/formInfo'
 import Result from './resultTest'
+
+import '../pages/pagescss/personalPage.css'
+import chel3 from '../image/Screenshot 2022-05-11 at 16.22.05.png'
+import styled from '@emotion/styled'
 import { axiosClient } from '../../api/api.config'
 import { AuthContext } from '../app'
 
@@ -10,61 +13,62 @@ export default function PersonalAccount() {
 
   const auth = useContext(AuthContext)
 
-  useEffect(() => {
-    axiosClient.get(`/infos/${auth.user.id}`)
-      .then(response => {
-        auth.setAuth({
-          ...auth,
-          info: response.data.info,
-          isInfo: true
-        })
-      })
-      .catch(err => {
-        console.log('Запрос не прошёл')
-      })
+  const onSubmit = () => {
+    axiosClient.delete(`/sessions/${auth.user.id}`)
+    localStorage.removeItem('JWT')
+  }
 
-    axiosClient.get(`/results/${auth.user.id}`)
-      .then(response => {
-        auth.setAuth({
-          ...auth,
-          result: response.data.result,
-          isResult: true
-        })
-      })
-      .catch(err => {
-        console.log('Запрос не прошёл')
-      })
-  },[])
+  const Image = styled('img')`
+    width: 100%;
+    height: 100%;
+  `
 
-
-  const name = auth.info ? <h1 className='mainTxt'>{auth.info.first_name} {auth.info.last_name}</h1>  : <h1 className='mainTxt'>Personal Page</h1>
-  const visibleInfoTable = auth.isInfo ? <Info /> : <FormInfo />
-  const visibleResult = auth.result ? <Result /> : null
-
+  const StyledContainer = styled(Grid)`
+    min-height: 100vh;
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  `
   return (
-    <Grid
+    <StyledContainer
       container
-      direction='column'
-      maxWidth='xl'
+      justifyContent='center'
+      style={{ backgroundColor: "#37425d" }}
+      spacing={5}
       alignItems='center'
     >
-      <Grid item xs={12}>
-       {name}
+      <Grid item xs={12} md={7}>
+          <Info/>
       </Grid>
-      <Grid item xs={12}>
-        {visibleInfoTable}
-      </Grid>
-      <Grid item>
-        <Grid
-          container
-          marginTop={12}
-        >
-          <Grid item xs={12}>
-            {visibleResult}
+
+      <Grid item xs={12} md={5}>
+        <Box component="Image" sx={{ display: { xs: 'none', md: 'block' } }}>
+          <Grid container justifyContent='end'>
+            <Image alt='' src={chel3}/>
           </Grid>
+        </Box>
+
+      </Grid>
+
+      <Grid item xs={6} marginBottom={10}>
+        <Result/>
+      </Grid>
+      <Grid item xs={12} marginBottom={10}>
+        <Grid container justifyContent='space-around'>
+          <Button
+            onClick={onSubmit}
+            variant="contained"
+            color='secondary'
+            href='/'
+          >
+            Sign Out
+          </Button>
         </Grid>
       </Grid>
-    </Grid>
+
+
+    </StyledContainer>
   )
 }
 

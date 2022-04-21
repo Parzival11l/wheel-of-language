@@ -1,56 +1,51 @@
 import React, { useContext } from 'react'
-import { AppBar, Button, Container, Grid, Toolbar } from '@mui/material'
-import { NavLink } from 'react-router-dom'
-
-import './header.css'
+import { AppBar, Button, Container, Grid, Icon, IconButton, Toolbar, Typography } from '@mui/material'
+import { useNavigate, NavLink } from 'react-router-dom'
 import { axiosClient } from '../../api/api.config'
 import { AuthContext } from '../app'
+
+import './header.css'
+
 
 
 
 export default function Header() {
 
+  const navigate = useNavigate()
+
   const auth = useContext(AuthContext)
 
-  const onSubmit = () => { axiosClient.delete(`/sessions/${auth.user.id}` )}
+  const onSubmit = () => {
+    axiosClient.delete(`/sessions/${auth.user.id}`)
+    localStorage.removeItem('JWT')
+  }
 
-  const name = auth.user ? <h1 className='defaultTxt'>{auth.user.login}</h1> : <NavLink to={'/auth'}>Sign in</NavLink>
-  const signOut = auth.user ? <Button onClick={onSubmit} className='myBtn'>Sign Out</Button> : null
+  const signOut = auth.user ? <Button
+      onClick={onSubmit}
+      variant="contained"
+      href='/'
+    >
+      Sign Out</Button> :
+    <Typography onClick={() => {navigate('/auth')}} fontSize={30}>
+    Sign in</Typography>
+
+  const reg = auth.user ? <h1 align='center' className='headLogin'>Hello, {auth.user.login}</h1> : null
 
 
-  console.log(auth.user)
   return (
     <Container disableGutters maxWidth={false}>
       <AppBar position='static'>
         <Toolbar className='header'>
           <Grid
             container
-            justifyContent='space-between'
+            justifyContent='space-around'
             alignItems='center'
-            spacing={0}
           >
-            <Grid item>
-              <NavLink className='NavLinkMain' to='/'>Wheel of Language</NavLink>
+            <Grid item xs={4}>
+              {reg}
             </Grid>
             <Grid item>
-              <NavLink className='NavLink' to='/test'>Test</NavLink>
-            </Grid>
-            <Grid item>
-              <NavLink className='NavLink' to='/registration'>Registration</NavLink>
-            </Grid>
-            <Grid item>
-              <NavLink className='NavLink' to='/personal'>Personal Page</NavLink>
-            </Grid>
-
-            <Grid item>
-              <Grid container justifyContent='row' alignItems='center'>
-                <Grid item>
-             <h2>{name}</h2>
-                </Grid>
-                <Grid item margin={2}>
-                  {signOut}
-                </Grid>
-              </Grid>
+              {signOut}
             </Grid>
           </Grid>
 

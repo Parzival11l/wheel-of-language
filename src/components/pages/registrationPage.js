@@ -1,78 +1,111 @@
 import React, { useContext, useState } from 'react'
-import { FormControl, Grid, Button } from '@mui/material'
-import { NavLink, useNavigate } from 'react-router-dom'
-
-import './pagescss/registrationPage.css'
+import { Grid, Button, Typography, TextField, Container } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
 import { axiosClient } from '../../api/api.config'
 import { AuthContext } from '../app'
+import Swal from 'sweetalert2'
+
+import chel2 from '../image/Screenshot 2022-05-10 at 18.14.37.png'
+import styled from '@emotion/styled'
+
+import './pagescss/registrationPage.css'
+
+const Image = styled('img')`
+  width: 80%;
+  height: 90%;
+`
 
 export default function RegistrationPage() {
 
   const auth = useContext(AuthContext)
-
   const [login, setLogin] = useState('')
   const [password, setPass] = useState('')
   const navigate = useNavigate()
 
+  function onClick(nav) {
+    navigate(`/${nav}`)
+  }
+
   const onSubmit = () => {
     axiosClient.post('/users', { user: { login, password } })
       .then((response) => {
+        localStorage.setItem('JWT', response.headers.authorization)
         auth.setAuth({
           ...auth,
           isLoading: false,
           isSignedIn: true,
           user: response.data.user
         })
+
+        Swal.fire(
+          'Good job!',
+          'Welcome!',
+          'success'
+        )
         navigate('/personal')
       })
       .catch((error) => {
-        console.log(error)
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+        })
       })
+
   }
-  console.log(auth.user)
+
   return (
-    <Grid
-      container
-      alignItems='center'
-      direction='column'
-      className='registr'
-    >
-      <Grid item>
-        <h1 className='mainTxt'>Registration</h1>
-      </Grid>
-      <Grid item>
-        <FormControl>
-          <input
-            type='text'
-            value={login}
-            placeholder='login'
-            className='input'
-            onChange={(e) => setLogin(e.target.value)}
-          />
-          <input
-            type='password'
-            value={password}
-            placeholder='password'
-            className='input'
-            onChange={(e) => setPass(e.target.value)}
-          />
-        </FormControl>
-      </Grid>
-      <Grid item>
-        <Button
-          className='regBtn'
-          disabled={!password || !login}
-          onClick={onSubmit}
-        >
-          Registration
-        </Button>
-      </Grid>
-      <Grid container justifyContent='center' marginTop={20}>
-        <Grid item>
-          <NavLink to='/auth' className='defaultTxt'>Sign in</NavLink>
+      <Grid container>
+
+        <Grid item xs={5} marginTop={15}>
+          <Image alt='' src={chel2}/>
         </Grid>
+        <Grid item xs={2} marginTop={20}>
+          <Grid container justifyContent='center' alignItems='center'>
+            <Grid item xs={12}>
+              <Typography fontSize={60} color='white' align='center'>Registration</Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <input
+                className='input'
+                value={login}
+                required
+                onChange={(e) => setLogin(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <input
+                type='password'
+                className='input'
+                value={password}
+                onChange={(e) => setPass(e.target.value)}
+                required
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <Button
+                variant="contained"
+                disabled={!password || !login}
+                onClick={onSubmit}
+              >
+                Registration
+              </Button>
+            </Grid>
+            <Grid container justifyContent='center' marginTop={25}>
+              <Grid item xs={12}>
+                <Typography
+                  fontSize={30}
+                  color='white'
+                  align='center'
+                  onClick={() => {onClick('auth')}}
+                >
+                  Sign in</Typography>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+
       </Grid>
-    </Grid>
   )
 }
 
