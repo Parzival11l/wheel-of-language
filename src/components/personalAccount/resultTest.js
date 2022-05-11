@@ -8,7 +8,7 @@ export default function Result() {
 
   const [results, setResults] = useState([])
 
-  useEffect(() => {
+  useEffect(() => { 
     axiosClient.get(`/results`)
       .then(response => {
         setResults(response.data)
