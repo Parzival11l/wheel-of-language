@@ -27,7 +27,6 @@ export default function AuthPage() {
 
     axiosClient.post('/users/sign_in', { user: { login, password } })
       .then((response) => {
-        console.log(response)
         auth.setAuth({
           ...auth,
           isLoading: false,
@@ -48,55 +47,59 @@ export default function AuthPage() {
           title: 'Oops...',
           text: 'Something went wrong!'
         })
-  })
+      })
   }
 
   return (
-    <Grid container>
+    <Grid container alignItems='center'>
 
-        <Grid item xs={5} marginTop={15}>
-          <Image alt='' src={chel2}/>
-        </Grid>
-
-        <Grid item xs={2} marginTop={20}>
-          <Grid container justifyContent='center' alignItems='center'>
-            <Grid item xs={12}>
-              <Typography fontSize={60} color='white' align='center'>Sign in</Typography>
-            </Grid>
-            <Grid item xs={12}>
-          <input
-            type='text'
-            value={login}
-            placeholder='login'
-            className='input'
-            onChange={(e) => setLogin(e.target.value)}
-            required
-          />
-          <input
-            type='password'
-            value={password}
-            placeholder='password'
-            className='input'
-            onChange={(e) => setPass(e.target.value)}
-            required
-          />
+      <Grid item xs={5} marginTop={15}>
+        <Image alt='' src={chel2}/>
       </Grid>
-      <Grid item marginTop={4}>
-        <Button onClick={onSubmit} variant="contained">Sign In</Button>
-      </Grid>
-            <Grid container justifyContent='center' marginTop={20}>
-              <Grid item xs={12}>
-                <Typography
-                  fontSize={30}
-                  color='white'
-                  align='center'
-                  onClick={() => {navigate('/registration')}}
-                >
-                  Sign Up</Typography>
-        </Grid>
+      <Grid item xs={3}>
+        <Grid container justifyContent='center' alignItems='center' spacing={4}>
+          <Grid item xs={12}>
+            <Typography fontSize={60} color='white' align='center'>Sign in</Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <input
+              type='text'
+              value={login}
+              placeholder='login'
+              className='input'
+              onChange={(e) => setLogin(e.target.value)}
+              required
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <input
+              type='password'
+              value={password}
+              placeholder='password'
+              className='input'
+              onChange={(e) => setPass(e.target.value)}
+              required
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Grid container justifyContent='center'>
+              <Button onClick={onSubmit} variant="contained">Sign In</Button>
             </Grid>
           </Grid>
+          <Grid item xs={12}>
+            <Typography
+              fontSize={30}
+              color='white'
+              align='center'
+              onClick={() => {
+                navigate('/registration')
+              }}
+            >
+              Sign Up
+            </Typography>
+          </Grid>
         </Grid>
+      </Grid>
     </Grid>
   )
 }

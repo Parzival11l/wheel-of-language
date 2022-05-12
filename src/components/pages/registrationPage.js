@@ -55,34 +55,35 @@ export default function RegistrationPage() {
   }
 
   return (
-      <Grid container>
+    <Grid container alignItems='center'>
 
-        <Grid item xs={5} marginTop={15}>
-          <Image alt='' src={chel2}/>
-        </Grid>
-        <Grid item xs={2} marginTop={20}>
-          <Grid container justifyContent='center' alignItems='center'>
-            <Grid item xs={12}>
-              <Typography fontSize={60} color='white' align='center'>Registration</Typography>
-            </Grid>
-            <Grid item xs={12}>
-              <input
-                className='input'
-                value={login}
-                required
-                onChange={(e) => setLogin(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <input
-                type='password'
-                className='input'
-                value={password}
-                onChange={(e) => setPass(e.target.value)}
-                required
-              />
-            </Grid>
-            <Grid item xs={4}>
+      <Grid item xs={5} marginTop={15}>
+        <Image alt='' src={chel2}/>
+      </Grid>
+      <Grid item xs={3}>
+        <Grid container justifyContent='center' alignItems='center' spacing={4}>
+          <Grid item xs={12}>
+            <Typography fontSize={60} color='white' align='center'>Registration</Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <input
+              className='input'
+              value={login}
+              required
+              onChange={(e) => setLogin(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <input
+              type='password'
+              className='input'
+              value={password}
+              onChange={(e) => setPass(e.target.value)}
+              required
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Grid container justifyContent='center'>
               <Button
                 variant="contained"
                 disabled={!password || !login}
@@ -91,21 +92,23 @@ export default function RegistrationPage() {
                 Registration
               </Button>
             </Grid>
-            <Grid container justifyContent='center' marginTop={25}>
-              <Grid item xs={12}>
-                <Typography
-                  fontSize={30}
-                  color='white'
-                  align='center'
-                  onClick={() => {onClick('auth')}}
-                >
-                  Sign in</Typography>
-              </Grid>
-            </Grid>
+          </Grid>
+          <Grid item xs={12}>
+            <Typography
+              fontSize={30}
+              color='white'
+              align='center'
+              onClick={() => {
+                onClick('auth')
+              }}
+            >
+              Sign in
+            </Typography>
           </Grid>
         </Grid>
-
       </Grid>
+
+    </Grid>
   )
 }
 

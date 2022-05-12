@@ -40,9 +40,14 @@ function HomePage() {
   }
 
   return (
-    <StyledContainer container justifyContent='center' style={{ backgroundColor: "#171e2e" }}>
+    <StyledContainer
+      alignItems='center'
+      container
+      justifyContent='center'
+      style={{ backgroundColor: "#171e2e" }}
+    >
 
-      <Grid item xs={12} md={8} marginTop={40}>
+      <Grid item xs={12} md={8}>
         <Grid container spacing={10}>
           <Grid item>
             <Grid container>
