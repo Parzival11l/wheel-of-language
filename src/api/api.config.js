@@ -2,7 +2,11 @@ import axios from 'axios'
 
 const headers = {
   'Accept': 'application/json',
-  "Access-Control-Allow-Origin": "*"
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "*",
+  "Content-Type": "*",
+  "Authorization": "*",
+  "X-Requested-With": "*"
 }
 const baseURL = process.env.REACT_APP_BASE_URL
 
