@@ -2,6 +2,7 @@ import axios from 'axios'
 
 const headers = {
   'Accept': 'application/json',
+  "Allow:": "*",
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "*",
   "Access-Control-Allow-Methods": "*",
