@@ -4,6 +4,7 @@ const headers = {
   'Accept': 'application/json',
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "*",
+  "Access-Control-Allow-Methods": "*",
   "Content-Type": "*",
   "Authorization": "*",
   "X-Requested-With": "*"
