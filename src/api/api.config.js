@@ -2,6 +2,7 @@ import axios from 'axios'
 
 const headers = {
   'Accept': 'application/json',
+  'Content-Type': 'application/x-www-form-urlencoded',
   "Access-Control-Allow-Origin": "*"
 }
 const baseURL = process.env.REACT_APP_BASE_URL
