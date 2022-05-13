@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { Grid, Button, Typography, TextField, Container } from '@mui/material'
+import { Grid, Button, Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { axiosClient } from '../../api/api.config'
 import { AuthContext } from '../app'
@@ -69,6 +69,7 @@ export default function RegistrationPage() {
             <input
               className='input'
               value={login}
+              placeholder='login'
               required
               onChange={(e) => setLogin(e.target.value)}
             />
@@ -77,6 +78,7 @@ export default function RegistrationPage() {
             <input
               type='password'
               className='input'
+              placeholder='password'
               value={password}
               onChange={(e) => setPass(e.target.value)}
               required

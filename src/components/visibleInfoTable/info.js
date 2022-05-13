@@ -23,8 +23,22 @@ export default function Info() {
   const onClickFunc = () => {
     setIsInfo(!isInfo)
   }
-  const name = info ? <Typography align='center' fontFamily='Open Sans' fontSize={50} color='white'>{info.first_name} {info.last_name}</Typography> :
-    <Typography align='center' fontSize={50}>Personal Page</Typography>
+  const name = info ? <Typography
+      align='center'
+      fontFamily='Open Sans'
+      fontSize={50}
+      color='white'
+    >
+      {info.first_name} {info.last_name}
+  </Typography> :
+    <Typography
+      align='center'
+      fontFamily='Open Sans'
+      fontSize={50}
+      color='white'
+    >
+      Personal Page
+    </Typography>
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [age, setAge] = useState('')

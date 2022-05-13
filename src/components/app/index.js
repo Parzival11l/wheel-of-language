@@ -8,7 +8,6 @@ import HomePage from '../pages/homePage'
 import PersonalPage from '../pages/personalPage'
 import AuthPage from '../pages/authPage'
 import RegistrationPage from '../pages/registrationPage'
-import Header from '../Header'
 import NotFound from '../pages/notFound'
 
 import './app.css'

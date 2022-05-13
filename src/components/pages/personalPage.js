@@ -3,7 +3,6 @@ import { Grid } from '@mui/material'
 import PersonalAccount from '../personalAccount'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../app'
-import Header from '../Header'
 
 
 export default function PersonalPage() {

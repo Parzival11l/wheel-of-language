@@ -83,7 +83,7 @@ export default function AuthPage() {
           </Grid>
           <Grid item xs={12}>
             <Grid container justifyContent='center'>
-              <Button onClick={onSubmit} variant="contained">Sign In</Button>
+              <Button onClick={onSubmit} disabled={!password || !login} variant="contained">Sign In</Button>
             </Grid>
           </Grid>
           <Grid item xs={12}>

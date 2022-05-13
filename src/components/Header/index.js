@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
-import { AppBar, Button, Container, Grid, Icon, IconButton, Toolbar, Typography } from '@mui/material'
-import { useNavigate, NavLink } from 'react-router-dom'
+import { AppBar, Button, Container, Grid, Toolbar, Typography } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
 import { axiosClient } from '../../api/api.config'
 import { AuthContext } from '../app'
 
