@@ -67,12 +67,7 @@ export default function App() {
               <Route path="/auth" element={<AuthPage/>}/>
               <Route path="/registration" element={<RegistrationPage/>}/>
               <Route path='/*' element={<NotFound/>}/>
-              {auth.user && (
-                <>
-                  <Route path="/personal" element={<PersonalPage/>}/>
-                </>
-              )
-              }
+              {auth.user && <Route path="/personal" element={<PersonalPage/>}/>}
             </Routes>
           </Grid>
         </Grid>
