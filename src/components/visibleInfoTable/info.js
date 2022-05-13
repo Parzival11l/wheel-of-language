@@ -24,7 +24,7 @@ export default function
   const onClickFunc = () => {
     setIsInfo(!isInfo)
   }
-  const name = info ? <Typography
+  const name = info.last_name ? <Typography
       align='center'
       fontFamily='Open Sans'
       fontSize={50}
@@ -33,6 +33,8 @@ export default function
       {info.first_name} {info.last_name}
   </Typography> :
     <Typography
+      align='center'
+      fontFamily='Open Sans'
       fontSize={50}
       color='white'
     >
