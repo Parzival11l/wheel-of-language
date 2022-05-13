@@ -3,7 +3,8 @@ import { Button, FormControl, Grid, Typography } from '@mui/material'
 import { AuthContext } from '../app'
 import { axiosClient } from '../../api/api.config'
 
-export default function Info() {
+export default function
+  Info() {
 
 
   const auth = useContext(AuthContext)
@@ -95,40 +96,50 @@ export default function Info() {
         alignItems='center'
       >
         <Grid item xs={5}>
-          <FormControl>
-            <input
-              type='text'
-              value={firstName}
-              placeholder='FirstName'
-              className='input'
-              onChange={(e) => setFirstName(e.target.value)}
-              required
-            />
-            <input
-              type='text'
-              value={lastName}
-              placeholder='LastName'
-              className='input'
-              onChange={(e) => setLastName(e.target.value)}
-              required
-            />
-            <input
-              type='text'
-              value={age}
-              placeholder='Age'
-              className='input'
-              onChange={(e) => setAge(e.target.value)}
-              required
-            />
-            <input
-              type='text'
-              value={disabled}
-              placeholder='Disability'
-              className='input'
-              onChange={(e) => setDisabled(e.target.value)}
-              required
-            />
-          </FormControl>
+          <Grid container spacing={2}>
+            <Grid item xs={10}>
+              <input
+                type='text'
+                value={firstName}
+                placeholder='FirstName'
+                className='input'
+                onChange={(e) => setFirstName(e.target.value)}
+                required
+              />
+            </Grid>
+            <Grid item xs={10}>
+              <input
+                type='text'
+                value={lastName}
+                placeholder='LastName'
+                className='input'
+                onChange={(e) => setLastName(e.target.value)}
+                required
+              />
+
+            </Grid>
+            <Grid item xs={10}>
+              <input
+                type='text'
+                value={age}
+                placeholder='Age'
+                className='input'
+                onChange={(e) => setAge(e.target.value)}
+                required
+              />
+            </Grid>
+            <Grid item xs={10}>
+              <input
+                type='text'
+                value={disabled}
+                placeholder='Disability'
+                className='input'
+                onChange={(e) => setDisabled(e.target.value)}
+                required
+              />
+            </Grid>
+          </Grid>
+
         </Grid>
         <Grid item xs={1}>
           <Grid container spacing={2}>
