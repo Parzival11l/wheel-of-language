@@ -8,9 +8,11 @@ import chel3 from '../image/Screenshot 2022-05-11 at 16.22.05.png'
 import styled from '@emotion/styled'
 import { axiosClient } from '../../api/api.config'
 import { AuthContext } from '../app'
+import { useNavigate } from 'react-router-dom'
 
 export default function PersonalAccount() {
 
+  const navigate = useNavigate()
   const auth = useContext(AuthContext)
 
   const onSubmit = () => {
@@ -39,7 +41,7 @@ export default function PersonalAccount() {
       alignItems='center'
     >
       <Grid item xs={12} md={7}>
-          <Info/>
+        <Info/>
       </Grid>
 
       <Grid item xs={12} md={5}>
@@ -55,15 +57,24 @@ export default function PersonalAccount() {
         <Result/>
       </Grid>
       <Grid item xs={12} marginBottom={10}>
-        <Grid container justifyContent='space-around'>
-          <Button
-            onClick={onSubmit}
-            variant="contained"
-            color='secondary'
-            href='/'
-          >
-            Sign Out
-          </Button>
+        <Grid container spacing={5}>
+          <Grid item xs={6}>
+            <Grid container justifyContent='end'>
+              <Button variant="contained" onClick={() => {navigate('/')}}>Home</Button>
+            </Grid>
+
+          </Grid>
+          <Grid item xs={6}>
+
+            <Button
+              onClick={onSubmit}
+              variant="contained"
+              color='secondary'
+              href='/'
+            >
+              Sign Out
+            </Button>
+          </Grid>
         </Grid>
       </Grid>
 

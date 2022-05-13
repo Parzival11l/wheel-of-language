@@ -98,6 +98,11 @@ export default function AuthPage() {
               Sign Up
             </Typography>
           </Grid>
+          <Grid item xs={12}>
+            <Grid container justifyContent='center' alignItems='end'>
+              <Button variant="outlined" onClick={()=>{navigate('/')}}>Home</Button>
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
     </Grid>

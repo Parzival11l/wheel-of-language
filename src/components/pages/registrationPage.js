@@ -107,6 +107,11 @@ export default function RegistrationPage() {
               Sign in
             </Typography>
           </Grid>
+          <Grid item xs={12}>
+            <Grid container justifyContent='center' alignItems='end'>
+              <Button variant="outlined" onClick={()=>{navigate('/')}}>Home</Button>
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
 

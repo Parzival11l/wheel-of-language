@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Button, FormControl, Grid, Typography } from '@mui/material'
+import { Button, Grid, Typography } from '@mui/material'
 import { AuthContext } from '../app'
 import { axiosClient } from '../../api/api.config'
 
@@ -28,13 +28,11 @@ export default function
       align='center'
       fontFamily='Open Sans'
       fontSize={50}
-      color='white'
+      color='Yellow'
     >
       {info.first_name} {info.last_name}
   </Typography> :
     <Typography
-      align='center'
-      fontFamily='Open Sans'
       fontSize={50}
       color='white'
     >

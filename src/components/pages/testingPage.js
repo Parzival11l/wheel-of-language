@@ -28,6 +28,11 @@ export default function TestingPage() {
         <Grid item marginTop={25}>
           {onVisibleTest}
         </Grid>
+        <Grid item xs={12}>
+          <Grid container justifyContent='center' alignItems='end'>
+            <Button variant="outlined" onClick={()=>{navigate('/')}}>Home</Button>
+          </Grid>
+        </Grid>
       </Grid>
     )
 }

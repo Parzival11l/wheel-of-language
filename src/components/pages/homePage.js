@@ -54,7 +54,7 @@ function HomePage() {
               <Grid item xs={12}>
                 <Typography
                   variant="h1"
-                  fontSize={80}
+                  fontSize={70}
                   color='white'
                   fontFamily='Ultra'
                   align='center'
@@ -100,7 +100,7 @@ function HomePage() {
       </Grid>
 
       <Grid item xs={12} md={4} marginTop={20}>
-        <Box component="Image" sx={{ display: { xs: 'none', md: 'block' } }}>
+        <Box component="Image" sx={{ display: { md: 'none', lg: 'block' } }}>
           <Image alt='' src={chel}/>
         </Box>
       </Grid>
