@@ -7,8 +7,6 @@ const headers = {
 
 const baseURL = process.env.REACT_APP_BASE_URL
 
-console.log('process.env.REACT_APP_BASE_URL', process.env.REACT_APP_BASE_URL)
-
 const axiosClient = axios.create({
   headers,
   baseURL
