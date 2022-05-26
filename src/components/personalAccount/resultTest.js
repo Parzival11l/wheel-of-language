@@ -8,7 +8,7 @@ export default function Result() {
 
   const [results, setResults] = useState([])
 
-  useEffect(() => { 
+  useEffect(() => {
     axiosClient.get(`/results`)
       .then(response => {
         setResults(response.data)
@@ -41,7 +41,7 @@ export default function Result() {
                 <TableCell align="right">{moment(result.date).format('MMMM, dddd Do, YYYY')}</TableCell>
                 <TableCell align="right">{moment(result.game_time).format('h:mm:ss a')}</TableCell>
                 <TableCell align="right">{moment(result.time_start).format('h:mm:ss a')}</TableCell>
-                <TableCell align="right">{result.result}</TableCell>
+                <TableCell align="right">{result.total}</TableCell>
               </TableRow>
             ))}
           </TableBody>
