@@ -13,14 +13,12 @@ export default function Result() {
       .then(response => {
         setResults(response.data)
       })
-
       .catch(err => {
         console.log('Error')
       })
   }, [])
-
  if (!results) return null
-
+  console.log(results)
   return (
     <Grid container>
       <TableContainer>
